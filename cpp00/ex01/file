@@ -1,0 +1,4 @@
+// float numbetrs works ==> enter 0.1 in index works :(
+// entering the last index in the table doesn't show the contact's info :(
+// adding a contact when the table is full doeasn't put it in the first index :(
+// the table is looking ugly -_-' 
