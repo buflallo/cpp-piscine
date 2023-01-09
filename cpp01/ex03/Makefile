@@ -1,6 +1,6 @@
 
 NAME=UnnecessaryViolence
-SRC=main.cpp Weapon.hpp Weapon.cpp HumanA.hpp HumanA.cpp HumanB.hpp HumanB.cpp
+SRC=main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror
 CC=c++

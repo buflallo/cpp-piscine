@@ -1,10 +1,9 @@
 #include "Zombie.hpp"
-#define N 100
 
 int main()
 {
     Zombie *x;
 
-    x = zombieHorde(N, "haha");
+    x = zombieHorde(10, "haha");
     delete [] x;
 }
