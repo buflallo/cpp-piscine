@@ -1,5 +1,5 @@
-NAME=braaiinz
-SRC=main.cpp Bureaucrat.cpp 
+NAME=Bureaucrat
+SRC=main.cpp Bureaucrat.cpp Form.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror
 CC=c++

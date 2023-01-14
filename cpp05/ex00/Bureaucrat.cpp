@@ -2,11 +2,10 @@
 
 Bureaucrat::Bureaucrat(void)
 {
-    std::cout << "Bureaucrat Default constructor called" << std::endl;
+    throw Bureaucrat::Noinformation();
 }
 
-
-Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
+Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
 {
     if (grade < 1)
         throw Bureaucrat::GradeTooHighException();
@@ -14,7 +13,7 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
         throw Bureaucrat::GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(Bureaucrat const & src) : _name(src.getName()), _grade(src.getGrade())
+Bureaucrat::Bureaucrat(Bureaucrat const & src) : name(src.getName()), grade(src.getGrade())
 {
     *this = src;
 }
@@ -27,49 +26,39 @@ Bureaucrat & Bureaucrat::operator=(Bureaucrat const & rhs)
 {
     if (this != &rhs)
     {
-        this->_grade = rhs.getGrade();
+        this->grade = rhs.getGrade();
     }
     return *this;
 }
 
-std::string Bureaucrat::GradeTooLowException(void) const
-{
-    return "Grade too low";
-}
-
-std::string Bureaucrat::GradeTooHighException(void) const
-{
-    return "Grade too high";
-}
-
 std::string Bureaucrat::getName(void) const
 {
-    return this->_name;
+    return this->name;
 }
 
 int Bureaucrat::getGrade(void) const
 {
-    return this->_grade;
+    return this->grade;
 }
 
 void Bureaucrat::incrementGrade(void)
 {
-    if (this->_grade - 1 < 1)
+    if (this->grade - 1 < 1)
         throw Bureaucrat::GradeTooHighException();
     else
-        this->_grade--;
+        this->grade--;
 }
 
 void Bureaucrat::decrementGrade(void)
 {
-    if (this->_grade + 1 > 150)
+    if (this->grade + 1 > 150)
         throw Bureaucrat::GradeTooLowException();
     else
-        this->_grade++;
+        this->grade++;
 }
 
 std::ostream & operator<<(std::ostream & o, Bureaucrat const & rhs)
 {
-    o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade() << std::endl;
+    o << rhs.getName() << ", bureaucrat grade " << rhs.getGrade();
     return o;
 }
