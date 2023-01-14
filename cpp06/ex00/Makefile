@@ -1,4 +1,4 @@
-NAME=Bureaucrat
+NAME=Convert
 SRC =  main.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror

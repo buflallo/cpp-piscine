@@ -1,4 +1,4 @@
-NAME=Bureaucrat
+NAME=Serialize
 SRC =  main.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror

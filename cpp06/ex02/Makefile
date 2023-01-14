@@ -1,4 +1,4 @@
-NAME=Bureaucrat
+NAME=Typo
 SRC =  main.cpp Base.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror
