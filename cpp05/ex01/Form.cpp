@@ -13,6 +13,19 @@ Form::Form(std::string const &name, int gradeToSign, int gradeToExecute) : name(
         throw Form::GradeTooLowException();
 }
 
+Form::Form(Form const &src) : name(src.getName()), isSigned(src.getIsSigned()), gradeToSign(src.getGradeToSign()), gradeToExecute(src.getGradeToExecute())
+{
+}
+
+Form &Form::operator=(Form const &rhs)
+{
+    if (this != &rhs)
+    {
+        this->isSigned = rhs.getIsSigned();
+    }
+    return *this;
+}
+
 void Form::beSigned(Bureaucrat const & obj)
 {
     if (obj.getGrade() > gradeToSign)
@@ -47,6 +60,6 @@ std::ostream &    operator<<(std::ostream & o, Form const & src)
     o << src.getName() << ", form grade to sign " ;
     o << src.getGradeToSign() << ", form grade to execute ";
     o << src.getGradeToExecute() << std::endl;
-    o << "status : Form is " << (src.getIsSigned() ? "Well Signed" : "Not signed")<< std::endl;
+    o << "status : Form is " << (src.getIsSigned() ? "Well Signed" : "Not signed") << std::endl;
     return o;
 }

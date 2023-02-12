@@ -5,16 +5,25 @@ Form::~Form()
 {
 }
 
-Form::Form(Form const & src) :  name(src.name), isSigned(src.isSigned), gradeToSign(src.gradeToSign), gradeToExecute(src.gradeToExecute)
-{
-}
-
 Form::Form(std::string const &name, int gradeToSign, int gradeToExecute) : name(name), isSigned(false), gradeToSign(gradeToSign), gradeToExecute(gradeToExecute)
 {
     if (gradeToSign < 1 || gradeToExecute < 1)
         throw Form::GradeTooHighException();
     if (gradeToSign > 150 || gradeToExecute > 150)
         throw Form::GradeTooLowException();
+}
+
+Form::Form(Form const &src) : name(src.getName()), isSigned(src.getIsSigned()), gradeToSign(src.getGradeToSign()), gradeToExecute(src.getGradeToExecute())
+{
+}
+
+Form &Form::operator=(Form const &rhs)
+{
+    if (this != &rhs)
+    {
+        this->isSigned = rhs.getIsSigned();
+    }
+    return *this;
 }
 
 void Form::beSigned(Bureaucrat const & obj)

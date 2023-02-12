@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 16:17:03 by bufallo           #+#    #+#             */
+/*   Updated: 2023/02/12 16:17:04 by bufallo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <iostream>
 #include <string>
 #include <exception>
@@ -20,6 +32,8 @@ class Bureaucrat
         void decrementGrade(void);
 
     private:
+        std::string const name;
+        int grade;
         class GradeTooHighException : public std::exception
         {
             public:
@@ -44,8 +58,6 @@ class Bureaucrat
                     return "No information";
                 }
         };
-        std::string const name;
-        int grade;
 };
 
 std::ostream & operator<<(std::ostream & o, Bureaucrat const & rhs);

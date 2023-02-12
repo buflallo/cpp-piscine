@@ -18,6 +18,14 @@ class ShrubberyCreationForm : public Form
         ~ShrubberyCreationForm(void);
         ShrubberyCreationForm & operator=(ShrubberyCreationForm const & rhs);
         void execute(Bureaucrat const & executor) const;
+        class FileOpenException : public std::exception
+        {
+        public:
+            virtual const char *what() const throw()
+            {
+                return "Open file error";
+            }
+        };
 };
 
 #endif

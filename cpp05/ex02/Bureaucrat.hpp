@@ -1,12 +1,24 @@
-#ifndef Bureaucrat_HPP
-#define Bureaucrat_HPP
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 16:17:03 by bufallo           #+#    #+#             */
+/*   Updated: 2023/02/12 17:42:50 by bufallo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
+
 #include <iostream>
 #include <string>
 #include <exception>
 #include "Form.hpp"
 
 class Form;
-
 
 class Bureaucrat
 {
@@ -26,9 +38,9 @@ class Bureaucrat
         void decrementGrade(void);
         void signForm(Form &form);
         void executeForm(Form const & form);
-
-
     private:
+        std::string const name;
+        int grade;
         class GradeTooHighException : public std::exception
         {
             public:
@@ -53,8 +65,6 @@ class Bureaucrat
                     return "No information";
                 }
         };
-        std::string const name;
-        int grade;
 };
 
 std::ostream & operator<<(std::ostream & o, Bureaucrat const & rhs);

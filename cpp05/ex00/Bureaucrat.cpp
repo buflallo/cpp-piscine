@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 16:16:59 by bufallo           #+#    #+#             */
+/*   Updated: 2023/02/12 16:17:00 by bufallo          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(void)
@@ -15,7 +27,6 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : name(name), grade(grade)
 
 Bureaucrat::Bureaucrat(Bureaucrat const & src) : name(src.getName()), grade(src.getGrade())
 {
-    *this = src;
 }
 
 Bureaucrat::~Bureaucrat(void)

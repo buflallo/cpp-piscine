@@ -16,6 +16,7 @@ PresidentialPardonForm::~PresidentialPardonForm(void)
 PresidentialPardonForm & PresidentialPardonForm::operator=(PresidentialPardonForm const & rhs)
 {
     this->_target = rhs._target;
+    Form::operator=(rhs);
     return *this;
 }
 

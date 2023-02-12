@@ -8,7 +8,7 @@ int main()
    try 
    {
         Bureaucrat B("aristo",45);
-        ShrubberyCreationForm S("vio");
+        ShrubberyCreationForm S("lola");
         RobotomyRequestForm R("Robot");
         PresidentialPardonForm P("Document");
         B.signForm(S);
