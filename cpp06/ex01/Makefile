@@ -6,12 +6,12 @@
 #    By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 19:05:38 by hlachkar          #+#    #+#              #
-#    Updated: 2023/02/15 19:05:39 by hlachkar         ###   ########.fr        #
+#    Updated: 2023/04/15 01:02:10 by hlachkar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=Serialize
-SRC =  main.cpp
+SRC =  main.cpp Serializer.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror -std=c++98
 CC=c++
