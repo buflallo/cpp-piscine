@@ -6,12 +6,12 @@
 #    By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/15 19:05:41 by hlachkar          #+#    #+#              #
-#    Updated: 2023/02/15 19:05:42 by hlachkar         ###   ########.fr        #
+#    Updated: 2023/04/15 01:13:15 by hlachkar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME=Typo
-SRC =  main.cpp
+SRC =  main.cpp Base.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror -std=c++98
 CC=c++

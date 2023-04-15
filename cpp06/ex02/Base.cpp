@@ -1,58 +1,19 @@
 #include "Base.hpp"
 
-Base::~Base()
-{
-    std::cout << "Base destructor called" << std::endl;
-}
-
-A::A()
-{
-    std::cout << "A constructor called" << std::endl;
-}
-
-A::~A()
-{
-    std::cout << "A destructor called" << std::endl;
-}
-
-
-B::~B()
-{
-    std::cout << "B destructor called" << std::endl;
-};
-
-B::B()
-{
-    std::cout << "B constructor called" << std::endl;
-}
-
-
-
-C::~C()
-{
-    std::cout << "C destructor called" << std::endl;
-}
-
-C::C()
-{
-    std::cout << "C constructor called" << std::endl;
-}
-
-Base *Base::generate(void)
+Base *generate(void)
 {
     int Rand;
-    srand((unsigned) time(NULL));
+    srand(time(NULL));
     Rand = rand() % 3;
     if(Rand == 0)
-        return reinterpret_cast<Base *> (new A());
-    if(Rand == 1)
-        return reinterpret_cast<Base *> (new B());
-    if(Rand == 2)
-        return reinterpret_cast<Base *> (new C());
-    return NULL;
+        return dynamic_cast<Base *> (new A());
+    else if(Rand == 1)
+        return dynamic_cast<Base *> (new B());
+    else
+        return dynamic_cast<Base *> (new C());
 }
 
-void Base::identify(Base *p)
+void identify(Base *p)
 {
     A *ptrA;
     B *ptrB;
@@ -69,7 +30,7 @@ void Base::identify(Base *p)
         std::cout << ptrC << " is C" << std::endl;
 }
 
-void Base::identify(Base &p)
+void identify(Base &p)
 {
     try
     {
