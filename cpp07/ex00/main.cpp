@@ -1,4 +1,5 @@
 #include <iostream>
+
 template<typename T>
 
 void swap(T& a, T& b)
@@ -43,10 +44,10 @@ std::ostream & operator<<(std::ostream & o, const Awesome &a) { o << a.get_n(); 
 
 int main(void)
 {
-Awesome a(2), b(4);
-swap (a, b);
-std::cout << a << "'" << b << std::endl;
-std::cout << max(a, b);
-std::cout << min(a, b) << std::endl;
-return (0);
+    Awesome a(2), b(4);
+    swap (a, b);
+    std::cout << a << "'" << b << std::endl;
+    std::cout << max(a, b);
+    std::cout << min(a, b) << std::endl;
+    return (0);
 }

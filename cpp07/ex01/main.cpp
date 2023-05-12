@@ -1,4 +1,5 @@
 #include <iostream>
+
 template<typename T>
 
 void iter(T a[], int const & b, void  func(const T &))
