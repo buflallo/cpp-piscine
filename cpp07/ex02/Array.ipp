@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Array.ipp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/13 01:27:05 by hlachkar          #+#    #+#             */
+/*   Updated: 2023/05/13 01:27:06 by hlachkar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 template<typename T>
 Array<T>::Array() : m_data(new T[0]), m_size(0) {}
 
 template<typename T>
-Array<T>::Array(size_t size) : m_data(new T[size]), m_size(size) {}
+Array<T>::Array(size_t n) : m_data(new T[n]), m_size(n) {}
 
 template<typename T>
 Array<T>::~Array() {

@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   whatever.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/13 01:26:30 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/13 01:26:31 by hlachkar         ###   ########.fr       */
+/*   Created: 2023/05/13 01:26:49 by hlachkar          #+#    #+#             */
+/*   Updated: 2023/05/13 01:26:50 by hlachkar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "whatever.hpp"
+#include <iostream>
 
-int main(void)
+template<typename T>
+
+void swap(T& a, T& b)
 {
-    int a(2), b(4);
-    swap<int>(a, b);
-    std::cout << a << "'" << b << std::endl;
-    std::cout << max<int>(a, b);
-    std::cout << min<int>(a, b) << std::endl;
-    return (0);
+    T tmp;
+
+    tmp = a;
+    a = b;
+    b = tmp;
+}
+
+template<typename T>
+T max(const T& a, const T& b)
+{
+    return a > b ? a : b;
+}
+
+template<typename T>
+T min(const T& a, const T& b)
+{
+    return a < b ? a : b;
 }
