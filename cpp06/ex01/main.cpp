@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/15 19:05:35 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/04/15 01:01:43 by hlachkar         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:46:10 by bufallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int main()
 {
-    Data d;
-    Serializer test;
-    uintptr_t p;
+    Data d; // to serialaze
+    Serializer test; // object with method to do job
+    uintptr_t p; // holder of the data
 
     d.i = 5;
     
