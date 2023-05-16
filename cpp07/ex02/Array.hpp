@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:27:03 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/13 01:27:04 by hlachkar         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:30:38 by bufallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ private:
 public:
     Array();
 
-    Array(size_t size);
+    Array(size_t n);
 
     ~Array();
 
     Array(Array<T> const &src);
 
-    Array &operator=(Array const &rhs);
+    Array<T> &operator=(Array<T> const &rhs);
 
     T& operator[](size_t i);
     T const &operator[](size_t i) const;

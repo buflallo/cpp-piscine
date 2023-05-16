@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:26:58 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/13 01:26:59 by hlachkar         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:27:54 by bufallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ int main(void)
 {
     int tab[5] = { 0,1,2,3,4 };
 
-    iter<int>(tab, 5 , print);
+    iter<int>(tab, 5, print<int>);
     return (0);
 }

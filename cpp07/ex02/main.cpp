@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:27:07 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/13 01:27:08 by hlachkar         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:48:44 by bufallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,14 @@ int main()
 {
     Array<int> arr(10);
     const Array<char> arr1(7); //checking the read only case
-    Array<int> arr2;
-
+    Array<int> arr2(10);
+    int i = 0
+    while (i < 10)
+    {
+        arr2[i] =30;
+        i++;
+    }
     arr2 = arr;
-    arr2[5] =30;
     // arr1[5] = 97; // here "checking the read only case"
     for (size_t i = 0; i < arr.size(); i++) {
         std::cout << arr[i] << " ";

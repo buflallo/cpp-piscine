@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.ipp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:27:05 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/13 01:27:06 by hlachkar         ###   ########.fr       */
+/*   Updated: 2023/05/16 23:42:04 by bufallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ Array<T> &Array<T>::operator=(Array<T> const &rhs)
     if (this != &rhs)
     {
         this->m_size = rhs.m_size;
+        if (this->m_data)
+            delete[] this->m_data;
         this->m_data = new T[rhs.m_size];
         for (unsigned int i = 0; i < rhs.m_size; i++)
             this->m_data[i] = rhs.m_data[i];
