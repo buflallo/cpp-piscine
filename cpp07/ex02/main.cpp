@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:27:07 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/16 23:48:44 by bufallo          ###   ########.fr       */
+/*   Updated: 2023/05/17 22:40:07 by hlachkar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,27 @@
 int main()
 {
     Array<int> arr(10);
-    const Array<char> arr1(7); //checking the read only case
     Array<int> arr2(10);
-    int i = 0
+    int i = 0;
+    
+    arr2 = arr;
     while (i < 10)
     {
         arr2[i] =30;
         i++;
     }
-    arr2 = arr;
+    // const Array<char> arr1(7); //checking the read only case
     // arr1[5] = 97; // here "checking the read only case"
     for (size_t i = 0; i < arr.size(); i++) {
         std::cout << arr[i] << " ";
-        std::cout << arr2[i] << " ";
-        try{
-            std::cout << arr1[i] << " " << std::endl; // here "checking the read only case"
-        }
-        catch (std::exception &e)
-        {
-            std::cout << e.what() << std::endl;
-        }
+        std::cout << arr2[i] << " " << std::endl;
+        // try{
+        //     std::cout << arr1[i] << " " << std::endl; // here "checking the read only case"
+        // }
+        // catch (std::exception &e)
+        // {
+        //     std::cout << e.what() << std::endl;
+        // }
     }
     std::cout << std::endl;
     return 0;

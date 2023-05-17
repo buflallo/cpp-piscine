@@ -74,7 +74,8 @@
         "__tree": "cpp",
         "complex": "cpp",
         "map": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "*.ipp": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

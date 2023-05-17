@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:27:03 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/16 23:30:38 by bufallo          ###   ########.fr       */
+/*   Updated: 2023/05/17 22:41:17 by hlachkar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,29 @@
 
 #include <iostream>
 
-
 template<typename T>
 class Array {
-private:
-    T* m_data;
-    size_t m_size;
+    private:
+        T* m_data;
+        size_t m_size;
 
-public:
-    Array();
+    public:
+        Array();
 
-    Array(size_t n);
+        Array(size_t n);
 
-    ~Array();
+        ~Array();
 
-    Array(Array<T> const &src);
+        Array(Array<T> const &src);
 
-    Array<T> &operator=(Array<T> const &rhs);
+        Array<T> &operator=(Array<T> const &rhs);
 
-    T& operator[](size_t i);
-    T const &operator[](size_t i) const;
+        T& operator[](size_t i);
+        T const &operator[](size_t i) const;
 
-    size_t size() const;
+        size_t size() const;
 };
 
-#include "Array.ipp"
+#include "Array.tpp"
 
 #endif
