@@ -22,7 +22,9 @@ class Span
         int shortestSpan();
         int longestSpan();
         void fill_v(int n);
+        std::vector<int> const & get_v();
 };
 
+void print_v(std::vector<int> v);
 
 #endif

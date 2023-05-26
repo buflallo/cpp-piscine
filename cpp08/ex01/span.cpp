@@ -40,17 +40,17 @@ int Span::shortestSpan()
 {
     if (this->_v.size() < 2)
         throw std::out_of_range("Span is too short");
-    std::vector<int> v_tmp = this->_v;
+    int s_span;
+    std::vector<int>::iterator it;
+    std::vector<int> v_tmp(this->_v);
+
     std::sort(v_tmp.begin(), v_tmp.end());
-    std::vector<int>::iterator it = v_tmp.begin();
-    std::vector<int>::iterator it_sec = v_tmp.begin()+1;
-    int s_span = *it_sec - *it;
-    while (it_sec != v_tmp.end() - 1)
+    it = v_tmp.begin();
+    s_span = *(it+1) - *it;
+    while ((it++)+1 != v_tmp.end() - 1)
     {
-        it++;
-        it_sec++;
-        if (s_span > *it_sec - *it)
-            s_span = *it_sec - *it;
+        if (s_span > *(it+1) - *it)
+            s_span = *(it+1) - *it;
     }
     return s_span;
 }
@@ -59,24 +59,42 @@ int Span::longestSpan()
 {
     if (this->_v.size() < 2)
         throw std::out_of_range("Span is too short");
-    std::vector<int> v_tmp = this->_v;
+    std::vector<int> v_tmp(this->_v);
+
     std::sort(v_tmp.begin(), v_tmp.end());
-    std::vector<int>::iterator it = v_tmp.begin();
-    std::vector<int>::iterator it_end = v_tmp.end() - 1;
-    return *it_end - *it;
+    return *(v_tmp.end() - 1) - *v_tmp.begin();
 }
 
-int my_rand()
+static int my_rand()
 {
     return rand() % 100;
+}
+
+std::vector<int> const & Span::get_v()
+{
+    return static_cast<std::vector<int> const &>(_v);
 }
 
 void Span::fill_v(int n)
 {
     if (this->_v.size() + n > this->_n)
-        throw std::out_of_range("Span is full");
+        throw std::out_of_range("Span can't fill elements");
     std::vector<int> v_tmp(n);
+
     srand(time(NULL));
     std::generate(v_tmp.begin(), v_tmp.end(), my_rand);
     _v.insert(_v.begin() , v_tmp.begin(), v_tmp.end());
+}
+
+void print_v(std::vector<int> v)
+{
+    std::vector<int>::iterator it;
+
+    it = v.begin();
+    while (it != v.end())
+    {
+        std::cout << *it << " ";
+        it++;
+    }
+    std::cout << std::endl;
 }

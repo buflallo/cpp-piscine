@@ -1,12 +1,12 @@
 NAME	= Span
-CC		= c++
+CC		= c++ -std=c++98
 FLAGS	= -Wall -Werror -Wextra
 SRCS 	= main.cpp span.cpp
-			
-$(NAME): $(SRCS)
-	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 all: $(NAME)
+
+$(NAME): $(SRCS)
+	$(CC) $(FLAGS) $(SRCS) -o $(NAME)
 
 clean:
 	@rm -rf *.o
