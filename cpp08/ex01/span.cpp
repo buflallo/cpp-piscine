@@ -3,29 +3,24 @@
 
 Span::Span() : _n(0) 
 {
-    // std::cout << "Default constructor called" << std::endl;
 }
 
 Span::Span(unsigned int n) : _n(n)
 {
     _v.reserve(n);
-    // std::cout << "Constructor called" << std::endl;
 }
 
 Span::Span(Span const & src) 
 {
-    // std::cout << "Copy constructor called" << std::endl;
     *this = src;
 }
 
-Span::~Span() 
+Span::~Span()
 {
-    // std::cout << "Destructor called" << std::endl;
 }
 
 Span & Span::operator=(Span const & rhs) 
 {
-    // std::cout << "Assignation operator called" << std::endl;
     if (this != &rhs)
     {
         this->_n = rhs._n;
@@ -36,38 +31,52 @@ Span & Span::operator=(Span const & rhs)
 
 void Span::addNumber(int n)
 {
-    if (this->_v.size() < this->_n)
-        this->_v.push_back(n);
-    else
-        throw std::exception();
+    if (this->_v.size() == this->_n)
+        throw std::out_of_range("Span is full");
+    this->_v.push_back(n);
 }
 
 int Span::shortestSpan()
 {
     if (this->_v.size() < 2)
-        throw std::exception();
-    int min = *_v.begin();
-    
-    return min2 - min;
+        throw std::out_of_range("Span is too short");
+    std::vector<int> v_tmp = this->_v;
+    std::sort(v_tmp.begin(), v_tmp.end());
+    std::vector<int>::iterator it = v_tmp.begin();
+    std::vector<int>::iterator it_sec = v_tmp.begin()+1;
+    int s_span = *it_sec - *it;
+    while (it_sec != v_tmp.end() - 1)
+    {
+        it++;
+        it_sec++;
+        if (s_span > *it_sec - *it)
+            s_span = *it_sec - *it;
+    }
+    return s_span;
 }
 
 int Span::longestSpan()
 {
     if (this->_v.size() < 2)
-        throw std::exception();
-    std::vector<int> v = this->_v;
-    std::sort(v.begin(), v.end());
-    return v[v.size() - 1] - v[0];
+        throw std::out_of_range("Span is too short");
+    std::vector<int> v_tmp = this->_v;
+    std::sort(v_tmp.begin(), v_tmp.end());
+    std::vector<int>::iterator it = v_tmp.begin();
+    std::vector<int>::iterator it_end = v_tmp.end() - 1;
+    return *it_end - *it;
 }
 
-void Span::generate(void)
+int my_rand()
 {
-    std::vector<int>::iterator it = this->_v.begin();
+    return rand() % 100;
+}
+
+void Span::fill_v(int n)
+{
+    if (this->_v.size() + n > this->_n)
+        throw std::out_of_range("Span is full");
+    std::vector<int> v_tmp(n);
     srand(time(NULL));
-    for (size_t i = 0; i < (size_t)_v.capacity(); i++)
-    {
-        *it = rand() % 10000;
-        _v.insert(it, *it);
-        it++;
-    }
+    std::generate(v_tmp.begin(), v_tmp.end(), my_rand);
+    _v.insert(_v.begin() , v_tmp.begin(), v_tmp.end());
 }

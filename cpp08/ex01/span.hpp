@@ -6,11 +6,6 @@
 # include <vector>
 # include <algorithm>
 # include <iterator>
-#include <cctype>
-#include <random>
-
-using u32    = uint_least32_t; 
-using engine = std::mt19937;
 
 class Span
 {
@@ -23,10 +18,10 @@ class Span
         Span(Span const & src);
         ~Span();
         Span & operator=(Span const & rhs);
-        void addNumber(int n);
+        void addNumber(int nb);
         int shortestSpan();
         int longestSpan();
-        void generate(void);
+        void fill_v(int n);
 };
 
 

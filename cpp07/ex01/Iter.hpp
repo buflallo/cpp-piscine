@@ -6,7 +6,7 @@
 /*   By: bufallo <bufallo@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 01:26:56 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/16 23:27:25 by bufallo          ###   ########.fr       */
+/*   Updated: 2023/05/18 09:04:14 by bufallo          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 template<typename T>
 
-void iter(T a[], int const & b, void  func(const T &))
+void iter(T a[], int const & b, void  func(T &))
 {
     int i = 0;
     while (i < b)
@@ -25,7 +25,7 @@ void iter(T a[], int const & b, void  func(const T &))
 }
 
 template<typename T>
-void print(T const &a)
+void print(T &a)
 {
     std::cout << a << std::endl;
 }
