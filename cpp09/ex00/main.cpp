@@ -2,72 +2,94 @@
 #include <iostream>
 #include <string>
 #include <map>
-#include <regex>
+#include <iomanip>
+#include <sstream>
 
 
-void test (std::map<std::string, float> exchange_rates)
+void test(std::map<std::string, float> const & exchange_rates, std::string const & date, float const & val)
 {
-    std::string date_to_lookup = "2012-03-17";
-    if (exchange_rates.count(date_to_lookup))
+    try
     {
-        std::cout << "Exchange rate for " << date_to_lookup << ": " << exchange_rates[date_to_lookup] << std::endl;
+        float ex_rate = exchange_rates.at(date);
+        std::cout << "Exchange rate for " << date << ": " << ex_rate * val << std::endl;
     }
-    else
+    catch (std::exception &e)
     {
-        std::cout << "No exchange rate data available for " << date_to_lookup << std::endl;
+        std::cout << "Exchange rate for " << date << ": " << (--exchange_rates.lower_bound(date))->second * val << std::endl;
     }
-
 }
 
-void initialize_database(std::map<std::string, float> &exchange_rates)
+void initialize_database(std::map<std::string, float> & exchange_rates)
 {
     std::ifstream infile("data.csv");
     float rate;
-    std::string date_str, rate_str, line;
-    std::string::size_type delimiter_pos;
+    std::istringstream in;
+    std::string date_str, line;
     std::getline(infile, line);
     while (std::getline(infile, line))
     {
-        delimiter_pos = line.find(',');
-        date_str = line.substr(0, delimiter_pos);
-        rate_str = line.substr(delimiter_pos + 1);
-        rate = std::stof(rate_str);
+        line.replace(10, 1, " ");
+        in.str(line);
+        in >> date_str >> rate;
+        in.clear();
         exchange_rates[date_str] = rate;
     }
 }
 
-bool is_valid_float(std::string& str) {
-    float value;
-    static const std::regex float_pattern("^[ -+]?([0-9]*\\.[0-9]+|[0-9]+)");
+bool validate_date(std::string const & date)
+{
+    std::istringstream in(date);
+    std::string chk;
+    int year, month, day;
+    char delimiter;
 
-    if (str.find(',') != std::string::npos)
-        str.replace(str.find(','), 1, ".");
-    if (str.find('.') != std::string::npos && !std::regex_match(str, float_pattern))
-        return false ;
-    try
-    {
-        value = std::stof(str);
-        if(value > 1000 || value < 0)
-            return false ;
+    if (in >> year >> delimiter >> month >> delimiter >> day) {
+        if (in.fail() || delimiter != '-' || in >> chk) {
+            return false;
+        }
+        if (year < 2009 || year > 9999) {
+            return false;
+        }
+        if (month < 1 || month > 12) {
+            return false;
+        }
+        if (day < 1 || day > 31) {
+            return false;
+        }
+        return true;
     }
-    catch(std::exception &f)
+
+    return false;
+}
+
+bool validate(std::string const & date, char const & delim, float const & value, std::string const & line)
+{
+    if (value < 0)
     {
-        return false ;
+        std::cout << "Error: not a positive number." << std::endl;
+        return false;
+    }
+    if (value > 1000)
+    {
+        std::cout << "Error: too large a number." << std::endl;
+        return false;
+    }
+    if (!validate_date(date) || delim != '|')
+    {
+        std::cout << "Error: bad input => " << line << std::endl;
+        return false;
     }
     return true;
 }
 
-bool is_valid_date(const std::string& str) {
-    std::string d_start("2009-01-02"), d_end("2022-03-29");
-    static const std::regex float_pattern("^(((19|20)([2468][048]|[13579][26]|0[48])|2000)[-]02[-]29|((19|20)[0-9]{2}[-](0[4678]|1[02])[-](0[1-9]|[12][0-9]|30)|(19|20)[0-9]{2}[-](0[1359]|11)[-](0[1-9]|[12][0-9]|3[01])|(19|20)[0-9]{2}[-]02[-](0[1-9]|1[0-9]|2[0-8])))[ ]$");
-    return (str > d_end || str < d_start || std::regex_match(str, float_pattern));
-}
-
-void parse_file(std::string filename)
+void parse_file(std::string const & filename, std::map<std::string, float> const & exchange_rates)
 {
-    std::string date_str, value_str, line;
-    std::string::size_type delimiter_pos;
-    std::ifstream infile(filename);
+    std::string date_str, line, chk;
+    float value;
+    std::string::size_type pos;
+    std::istringstream in;
+    char delim;
+    std::ifstream infile(filename.c_str());
     
     if (!infile || infile.fail()) {
         std::cerr << "Error: failed to open file " << filename << std::endl;
@@ -76,32 +98,34 @@ void parse_file(std::string filename)
     std::getline(infile, line);
     while (std::getline(infile, line))
     {
-        delimiter_pos = line.find('|');
-        if(delimiter_pos == std::string::npos)
-            continue ;
-        date_str = line.substr(0, delimiter_pos);
-        value_str = line.substr(delimiter_pos + 1);
-        if(!is_valid_float(value_str))
-            continue ;
-        if (!is_valid_date(date_str))
-            continue ;
-        std::cout << date_str << "|" << value_str << std::endl;
-        // std::cout << value << std::endl;
+        pos = line.find(',');
+        if (pos != std::string::npos)
+            line.replace(pos, 1, ".", 1);
+        in.str(line);
+        in >> date_str >> delim >> value;
+        if (!in.fail() && !(in >> chk))
+        {
+            if (validate(date_str, delim, value, line))
+                test(exchange_rates, date_str, value);
+        }
+        else
+            std::cout << "Error: bad input => " << line << std::endl;
+        in.clear();
     }
 }
 
 int main(int ac, char **av)
 {
-    std::map<std::string, float> exchange_rates;
-    initialize_database(exchange_rates);
-    //parse the input.txt
     if (ac != 2)
     {
         std::cerr << "wrong number of arguments" << std::endl;
         return (1);
     }
-    parse_file(av[1]);
-    // test(exchange_rates);
+
+    std::map<std::string, float> exchange_rates;
+    initialize_database(exchange_rates);
+    //parse the input.txt
+    parse_file(av[1], exchange_rates);
 
     return (0);
 }

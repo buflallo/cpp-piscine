@@ -1,5 +1,5 @@
-NAME=Polymorphisme
-SRC=main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+NAME=RPN
+SRC=main.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror
 CC=c++
