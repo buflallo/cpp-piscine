@@ -1,8 +1,8 @@
-NAME=Polymorphisme
-SRC=main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+NAME=PmergeMe
+SRC=main.cpp PmergeMe.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror
-CC=c++
+CC=c++ -fsanitize=address -g3
 
 all: $(NAME)
 
