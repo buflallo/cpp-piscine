@@ -13,7 +13,7 @@ int main(int ac, char **av)
     std::cout << "before : ";
     print(vector);
     double start = GetTime();
-    MergeSort(vector, vector.begin(), vector.end() - 1);
+    MergeSort(vector);
     double end = GetTime();
     double time = end - start ;
     std::cout << "after : ";

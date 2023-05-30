@@ -8,9 +8,10 @@
 
 
 typedef std::vector<int>::iterator Iterator;
+typedef std::vector<int>::const_iterator Const_iterator;
 
 void MergeAndInsert(std::vector<int>& arr, Iterator low, Iterator mid, Iterator high);
-void MergeSort(std::vector<int>& arr, Iterator low, Iterator high);
+void MergeSort(std::vector<int>& arr);
 void MergeAndInsert(std::list<int>& result, std::list<int>& left, std::list<int>& right);
 void MergeSort(std::list<int>& inputList);
 double GetTime();
