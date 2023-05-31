@@ -1,8 +1,8 @@
 NAME=RPN
-SRC=main.cpp
+SRC=main.cpp RPN.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror
-CC=c++
+CC=c++ -std=c++98
 
 all: $(NAME)
 

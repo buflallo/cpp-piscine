@@ -1,8 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/31 01:37:33 by hlachkar          #+#    #+#              #
+#    Updated: 2023/05/31 01:37:34 by hlachkar         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME=PmergeMe
 SRC=main.cpp PmergeMe.cpp
 OBJ=$(SRC:.cpp=.o)
 CFLAGS=-Wall -Wextra -Werror
-CC=c++ -fsanitize=address -g3
+CC=c++ -std=c++98
 
 all: $(NAME)
 

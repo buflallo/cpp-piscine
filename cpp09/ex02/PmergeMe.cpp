@@ -1,10 +1,25 @@
-#include "PmergeMe.hpp"
-void MergeAndInsert(std::vector<int>& result, std::vector<int>& left, std::vector<int>& right) {
-    result.clear();
-    result.reserve(left.size() + right.size());  // Pre-allocate memory for the result vector
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   PmergeMe.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/31 01:37:40 by hlachkar          #+#    #+#             */
+/*   Updated: 2023/05/31 01:37:41 by hlachkar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-    Iterator leftIt = left.begin();
-    Iterator rightIt = right.begin();
+#include "PmergeMe.hpp"
+
+// start vector sort
+
+void MergeAndInsert(std::vector<int>& result, std::vector<int> const & left, std::vector<int> const & right) {
+    result.clear();
+    result.reserve(left.size() + right.size());
+
+    std::vector<int>::const_iterator leftIt = left.begin();
+    std::vector<int>::const_iterator rightIt = right.begin();
 
     while (leftIt != left.end() && rightIt != right.end()) {
         if (*leftIt < *rightIt) {
@@ -14,111 +29,146 @@ void MergeAndInsert(std::vector<int>& result, std::vector<int>& left, std::vecto
         }
     }
 
-    // Append the remaining elements from left and right (if any)
     result.insert(result.end(), leftIt, left.end());
     result.insert(result.end(), rightIt, right.end());
 }
 
+void insert_sort(std::vector<int>& arr) {
+    for (size_t i = 1; i < arr.size(); ++i) {
+        int key = arr[i];
+        int j = i - 1;
+
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j];
+            --j;
+        }
+        arr[j + 1] = key;
+    }
+}
+
 void MergeSort(std::vector<int>& arr) {
-    int threshold = 16;
+    int threshold = 100;
 
     if (arr.size() > 1) {
         if ((int)arr.size() <= threshold) {
-            // Perform insertion sort for small subarrays
-            for (size_t i = 1; i < arr.size(); ++i) {
-                int key = arr[i];
-                int j = i - 1;
-
-                while (j >= 0 && arr[j] > key) {
-                    arr[j + 1] = arr[j];
-                    --j;
-                }
-                arr[j + 1] = key;
-            }
+            insert_sort(arr);
         } 
         else{
             std::vector<int> left, right;
 
-            // Divide the list into two halves
             size_t mid = arr.size() / 2;
 
-            // Reserve memory for left and right vectors
             left.reserve(mid);
             right.reserve(arr.size() - mid);
 
-            // Copy elements to left and right vectors using random access
-            std::copy(arr.begin(), arr.begin() + mid, std::back_inserter(left));
-            std::copy(arr.begin() + mid, arr.end(), std::back_inserter(right));
+            left.insert(left.end(), arr.begin(), arr.begin() + mid);
+            right.insert(right.end(), arr.begin() + mid, arr.end());
 
-            // Recursively sort the two halves
             MergeSort(left);
             MergeSort(right);
 
-            // Merge the sorted halves
-            arr.clear();
-            arr.reserve(left.size() + right.size());  // Pre-allocate memory for the arr vector
-
-            Iterator leftIt = left.begin();
-            Iterator rightIt = right.begin();
-
-            while (leftIt != left.end() && rightIt != right.end()) {
-                if (*leftIt < *rightIt) {
-                    arr.push_back(*leftIt++);
-                } else {
-                    arr.push_back(*rightIt++);
-                }
-            }
-
-            // Append the remaining elements from left and right (if any)
-            arr.insert(arr.end(), leftIt, left.end());
-            arr.insert(arr.end(), rightIt, right.end());
+            MergeAndInsert(arr, left, right);
         }
     }
     
 }
 
-void MergeAndInsert(std::list<int>& result, std::list<int>& left, std::list<int>& right) {
-    std::list<int>::iterator leftIt = left.begin();
-    std::list<int>::iterator rightIt = right.begin();
+// end vector sort
+
+// start list sort
+
+void MergeAndInsert(std::list<int>& result, std::list<int> const & left, std::list<int> const & right) {
+    result.clear();
+    
+    std::list<int>::const_iterator leftIt = left.begin();
+    std::list<int>::const_iterator rightIt = right.begin();
 
     while (leftIt != left.end() && rightIt != right.end()) {
         if (*leftIt < *rightIt) {
-            result.splice(result.end(), left, leftIt++);
+            result.push_back(*leftIt++);
         } else {
-            result.splice(result.end(), right, rightIt++);
+            result.push_back(*rightIt++);
         }
     }
 
-    result.splice(result.end(), left, leftIt, left.end());
-    result.splice(result.end(), right, rightIt, right.end());
+    result.insert(result.end(), leftIt, left.end());
+    result.insert(result.end(), rightIt, right.end());
+
 }
 
 void MergeSort(std::list<int>& arr) {
-    if (arr.size() <= 1) {
-        return;
+    
+    if (arr.size() > 1)
+    {
+        std::list<int> left, right;
+
+        std::list<int>::iterator it = arr.begin();
+        std::advance(it, arr.size() / 2);
+
+        left.insert(left.begin(), arr.begin(), it);
+        right.insert(right.begin(), it, arr.end());
+
+        MergeSort(left);
+        MergeSort(right);
+
+        MergeAndInsert(arr, left, right);
     }
-
-    std::list<int> left, right;
-
-    // Divide the list into two halves
-    std::list<int>::iterator it = arr.begin();
-    std::advance(it, arr.size() / 2);
-    left.splice(left.begin(), arr, arr.begin(), it);
-    right.splice(right.begin(), arr, it, arr.end());
-
-    // Recursively sort the two halves
-    MergeSort(left);
-    MergeSort(right);
-
-    // Merge the sorted halves
-    MergeAndInsert(arr, left, right);
 }
 
+// end list sort
 
+//helpers
+
+static void onlydigits(std::string str)
+{
+    size_t i = 0;
+    if (str[i] == '+')
+        i++;
+    for (; i < str.length(); i++)
+    {
+        if (!std::isdigit(str[i]))
+            throw std::exception();
+    }
+}
+
+void fill_vector(std::vector<int>& arr, int ac, char **av)
+{
+    arr.reserve(ac - 1);
+    for(int i = 1; i < ac; i++)
+    {
+        try
+        {
+            onlydigits(av[i]);
+            arr.push_back(std::stoi(av[i]));
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << "Error: only digits are accepted " << std::endl;
+            exit(1);
+        }
+    }
+}
+
+void fill_list(std::list<int> &List, int ac, char **av)
+{
+    for(int i = 1; i < ac; i++)
+    {
+        try
+        {
+            onlydigits(av[i]);
+            List.push_back(std::stoi(av[i]));
+        }
+        catch(const std::exception& e)
+        {
+            std::cerr << "Error: only digits are accepted" << std::endl;
+            exit(1);
+        }
+    }
+}
 
 double GetTime()
 {
     struct timeval time;
     gettimeofday(&time, NULL);
-    return (time.tv_sec + time.tv_usec);
+    return (time.tv_sec * 1000000 + time.tv_usec);
 }

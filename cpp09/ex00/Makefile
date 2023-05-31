@@ -1,8 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/31 01:39:55 by hlachkar          #+#    #+#              #
+#    Updated: 2023/05/31 01:39:56 by hlachkar         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME=btc
-SRC=main.cpp
+SRC=main.cpp BitcoinExchange.cpp
 OBJ=$(SRC:.cpp=.o)
-CFLAGS=-Wall -Wextra -Werror -std=c++98
-CC=c++
+CFLAGS=-Wall -Wextra -Werror
+CC=c++ -std=c++98
 
 all: $(NAME)
 

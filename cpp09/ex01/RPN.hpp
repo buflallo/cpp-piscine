@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hlachkar <hlachkar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 01:39:47 by hlachkar          #+#    #+#             */
-/*   Updated: 2023/05/31 01:39:48 by hlachkar         ###   ########.fr       */
+/*   Created: 2023/05/31 01:38:49 by hlachkar          #+#    #+#             */
+/*   Updated: 2023/05/31 01:38:50 by hlachkar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
+#ifndef RPN_HPP_ 
+#define RPN_HPP_
 
-int main(int ac, char **av)
-{
-    if (ac != 2)
-    {
-        std::cerr << "wrong number of arguments" << std::endl;
-        return (1);
-    }
+#include <iostream>
+#include <stack>
+#include <string>
+#include <cstdlib>
 
-    std::map<std::string, float> exchange_rates;
-    initialize_database(exchange_rates);
-    //parse the input.txt
-    parse_file(av[1], exchange_rates);
+int is_operator(char ex);
+int is_valid_rpn(std::string exp);
+int calcul_rpn(std::string exp);
 
-    return (0);
-}
+#endif
